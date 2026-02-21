@@ -3,7 +3,7 @@
 #include <PubSubClient.h>
 
 #include "config/secrets.h"
-#include "../node/core/Packet.h" // reuse packet struct
+#include "../common/Packet.h"
 
 WiFiClient wifiClient;
 PubSubClient mqtt(wifiClient);

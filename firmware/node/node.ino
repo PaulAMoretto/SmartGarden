@@ -3,7 +3,7 @@
 #include <ArduinoJson.h>
 
 #include "core/SensorRegistry.h"
-#include "core/Packet.h"
+#include "../common/Packet.h"
 #include "sensors/FakeAnalog.h"
 
 // ====== CONFIG ======
