@@ -1,0 +1,12 @@
+# Secrets (never commit)
+**/secrets.h
+
+# macOS
+.DS_Store
+
+# Arduino build artifacts (varies)
+**/*.elf
+**/*.bin
+**/*.map
+**/*.hex
+**/*.zip
