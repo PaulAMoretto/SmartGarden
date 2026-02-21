@@ -88,7 +88,11 @@ void onRecv(const esp_now_recv_info_t* info, const uint8_t* data, int len) {
 
   TelemetryPacket pkt{};
   memcpy(&pkt, data, sizeof(pkt));
-
+  if (pkt.proto != 1) {
+    Serial.print("RX wrong proto=");
+    Serial.println(pkt.proto);
+    return;
+  }
   int rssi = info->rx_ctrl ? info->rx_ctrl->rssi : 0;
 
   Serial.print("RX from ");
