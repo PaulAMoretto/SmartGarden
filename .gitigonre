@@ -1,7 +1,0 @@
-**/secrets.h
-.DS_Store
-**/*.elf
-**/*.bin
-**/*.map
-**/*.hex
-**/*.zip
