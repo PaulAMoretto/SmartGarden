@@ -9,4 +9,5 @@ struct TelemetryPacket {
   char node_id[16];
   uint32_t seq;
   char json[MAX_JSON];
+//Text place holder.
 };
