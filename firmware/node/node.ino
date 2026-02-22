@@ -10,7 +10,7 @@
 static const char* NODE_ID = "bed1";
 
 // Gateway MAC address (ESP32 gateway). Fill this in after you read it from gateway Serial.
-uint8_t GATEWAY_MAC[6] = {0x24, 0x6F, 0x28, 0xAA, 0xBB, 0xCC};
+uint8_t GATEWAY_MAC[6] = {0x10, 0x20, 0xBA, 0x4D, 0xE6, 0x6C};
 
 // Publish interval
 static const uint32_t PUBLISH_MS = 5000;
