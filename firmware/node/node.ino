@@ -11,7 +11,7 @@ static const char* NODE_ID = "bed1";
 
 // Gateway MAC address (ESP32 gateway). Fill this in after you read it from gateway Serial.
 uint8_t GATEWAY_MAC[6] = {0x10, 0x20, 0xBA, 0x4D, 0xE6, 0x6C};
-static const uint8_t ESPNOW_CHANNEL = 0; // TEMP placeholder; we will set this to the gateway WiFi channel
+static const uint8_t ESPNOW_CHANNEL = 6; // TEMP placeholder; we will set this to the gateway WiFi channel
 // Publish interval
 static const uint32_t PUBLISH_MS = 5000;
 // ====================
@@ -26,9 +26,13 @@ void onSent(const wifi_tx_info_t* info, esp_now_send_status_t status) {
 
 void setupEspNow() {
   WiFi.mode(WIFI_STA); // ESP-NOW uses STA mode
+  WiFi.disconnect(true, true);
+  delay(100);
+
   Serial.print("Node WiFi MAC: ");
   Serial.println(WiFi.macAddress());
   esp_wifi_set_channel(ESPNOW_CHANNEL, WIFI_SECOND_CHAN_NONE);
+  delay(10);
   if (esp_now_init() != ESP_OK) {
     Serial.println("ESP-NOW init failed");
     return;
@@ -38,7 +42,7 @@ void setupEspNow() {
 
   esp_now_peer_info_t peerInfo{};
   memcpy(peerInfo.peer_addr, GATEWAY_MAC, 6);
-  peerInfo.channel = 0;     // same channel as gateway AP/STA
+  peerInfo.channel = ESPNOW_CHANNEL;     // same channel as gateway AP/STA
   peerInfo.encrypt = false; // can add encryption later
 
   if (esp_now_add_peer(&peerInfo) != ESP_OK) {
