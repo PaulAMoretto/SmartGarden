@@ -19,7 +19,7 @@ static const uint32_t PUBLISH_MS = 5000;
 SensorRegistry sensors;
 uint32_t seq_num = 0;
 
-void onSent(const uint8_t* mac, esp_now_send_status_t status) {
+void onSent(const wifi_tx_info_t* info, esp_now_send_status_t status) {
   Serial.print("ESP-NOW send status: ");
   Serial.println(status == ESP_NOW_SEND_SUCCESS ? "OK" : "FAIL");
 }
