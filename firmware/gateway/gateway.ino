@@ -29,6 +29,8 @@ void ensureWifi() {
   if (WiFi.status() == WL_CONNECTED) {
     Serial.print("WiFi OK. IP=");
     Serial.println(WiFi.localIP());
+    Serial.print("WiFi channel: ");
+    Serial.println(WiFi.channel());
   } else {
     Serial.println("WiFi connect failed");
   }
