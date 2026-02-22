@@ -1,7 +1,7 @@
 #include <WiFi.h>
 #include <esp_now.h>
 #include <ArduinoJson.h>
-
+#include <esp_wifi.h>
 #include "core/SensorRegistry.h"
 #include "../common/Packet.h"
 #include "sensors/FakeAnalog.h"
@@ -11,7 +11,7 @@ static const char* NODE_ID = "bed1";
 
 // Gateway MAC address (ESP32 gateway). Fill this in after you read it from gateway Serial.
 uint8_t GATEWAY_MAC[6] = {0x10, 0x20, 0xBA, 0x4D, 0xE6, 0x6C};
-
+static const uint8_t ESPNOW_CHANNEL = 0; // TEMP placeholder; we will set this to the gateway WiFi channel
 // Publish interval
 static const uint32_t PUBLISH_MS = 5000;
 // ====================
@@ -28,10 +28,10 @@ void setupEspNow() {
   WiFi.mode(WIFI_STA); // ESP-NOW uses STA mode
   Serial.print("Node WiFi MAC: ");
   Serial.println(WiFi.macAddress());
-
+  esp_wifi_set_channel(ESPNOW_CHANNEL, WIFI_SECOND_CHAN_NONE);
   if (esp_now_init() != ESP_OK) {
     Serial.println("ESP-NOW init failed");
-    while (true) delay(1000);
+    return;
   }
 
   esp_now_register_send_cb(onSent);
